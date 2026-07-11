@@ -1,3 +1,4 @@
 # Programa da Inativadade
 Modelo incial ainda em testes
-Calculo para implementação para inatividade Brigada Militar
+
+Calculo para implementação para inatividade.
