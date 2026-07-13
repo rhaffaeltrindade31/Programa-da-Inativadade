@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
 
-from calculo import calcular
+from Calculo import calcular
 
 app = Flask(__name__)
 

@@ -1,23 +1,50 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Calculadora de Inatividade — Início{% endblock %}
+{% block content %}
 
-    <!-- Bloco do Cabeçalho -->
-    <div>
-        <h1>Aqui é a landing page do nosso site</h1>
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">Regra de transição · EC 103/2019</p>
+    <h1>Quando você completa o tempo de inatividade?</h1>
+    <p class="lede">
+      Informe seus dados de tempo de serviço geral e militar e veja, lado a lado,
+      a data estimada pela regra sem pedágio e pela regra com o acréscimo de 17%.
+    </p>
+    <a class="cta" href="{{ url_for('calculadora') }}">Calcular meu tempo →</a>
+  </div>
+
+  <div class="hero-card" aria-hidden="true">
+    <div class="ledger">
+      <div class="ledger-row">
+        <span>Tempo geral averbado</span><span class="mono">8.760 dias</span>
+      </div>
+      <div class="ledger-row">
+        <span>Acréscimo (pedágio 17%)</span><span class="mono">+ 501 dias</span>
+      </div>
+      <div class="ledger-row total">
+        <span>Data final estimada</span><span class="mono">29/01/2028</span>
+      </div>
     </div>
+    <div class="stamp">CONFERE</div>
+  </div>
+</section>
 
-    <!-- Bloco de Ação / Botão -->
-    <div>
-        <a href="/Calculadora">
-            <button>Ir para a Calculadora</button>
-        </a>
+<section class="how">
+  <p class="eyebrow">Como funciona</p>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">Sexo e tempo bruto</span>
+      <p>Informe o sexo e o tempo de serviço geral e militar apurado em 31/12/2019.</p>
     </div>
+    <div class="step">
+      <span class="step-num">Descontos e averbações</span>
+      <p>Entre com licenças especiais convertidas e tempos privados ou militares averbados após 2019.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">Duas datas, lado a lado</span>
+      <p>A ferramenta calcula o tempo geral e o tempo militar, aplicando o pedágio quando necessário.</p>
+    </div>
+  </div>
+</section>
 
-</body>
-</html>
+{% endblock %}

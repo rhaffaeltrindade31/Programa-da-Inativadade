@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Calculadora de Inatividade{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+  <header class="topbar">
+    <a href="{{ url_for('Index') }}" class="brand">
+      <span class="brand-mark">TI</span>
+      <span class="brand-name">Tempo de Inatividade</span>
+    </a>
+    <nav>
+      <a href="{{ url_for('Index') }}">Início</a>
+      <a href="{{ url_for('Calculadora') }}">Calculadora</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <p>Ferramenta de simulação — modelo inicial ainda em testes. Os resultados não substituem a análise oficial do órgão competente.</p>
+  </footer>
 </body>
 </html>

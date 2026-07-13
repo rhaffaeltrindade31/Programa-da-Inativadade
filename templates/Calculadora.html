@@ -1,23 +1,109 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Calculadora de Inatividade{% endblock %}
+{% block content %}
 
-    <!-- Bloco do Título -->
-    <div>
-        <h1>Aqui é onde será realizado o cálculo</h1>
-    </div>
+<section class="calc-page">
+  <div class="calc-form-wrap">
+    <p class="eyebrow">Ficha de cálculo</p>
+    <h1>Preencha seus dados</h1>
 
-    <!-- Bloco de Navegação (Para voltar à Landing Page) -->
-    <div>
-        <a href="/">
-            <button>Voltar para a Home</button>
-        </a>
-    </div>
+    {% if erro %}
+      <div class="alert">{{ erro }}</div>
+    {% endif %}
 
-</body>
-</html>
+    <form method="post" class="calc-form">
+      <fieldset>
+        <legend>Identificação</legend>
+        <label>
+          Sexo
+          <select name="sexo" required>
+            <option value="">Selecione</option>
+            <option value="M" {% if dados_form.get('sexo') == 'M' %}selected{% endif %}>Masculino</option>
+            <option value="F" {% if dados_form.get('sexo') == 'F' %}selected{% endif %}>Feminino</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Tempo bruto em 31/12/2019 (dias)</legend>
+        <label>
+          Tempo geral
+          <input type="number" name="tempo_bruto_geral_2019" required
+                 value="{{ dados_form.get('tempo_bruto_geral_2019', '') }}">
+        </label>
+        <label>
+          Tempo militar
+          <input type="number" name="tempo_bruto_militar_2019" required
+                 value="{{ dados_form.get('tempo_bruto_militar_2019', '') }}">
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Licenças especiais convertidas (dias)</legend>
+        <label>
+          Convertida após 24/07/2017
+          <input type="number" name="desconto_le_2017" required
+                 value="{{ dados_form.get('desconto_le_2017', 0) }}">
+        </label>
+        <label>
+          Convertida após 31/12/2019
+          <input type="number" name="desconto_le_2019" required
+                 value="{{ dados_form.get('desconto_le_2019', 0) }}">
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Averbações após 31/12/2019 (dias)</legend>
+        <label>
+          Tempo privado
+          <input type="number" name="tempo_privado_2019" required
+                 value="{{ dados_form.get('tempo_privado_2019', 0) }}">
+        </label>
+        <label>
+          Tempo militar
+          <input type="number" name="tempo_militar_2019" required
+                 value="{{ dados_form.get('tempo_militar_2019', 0) }}">
+        </label>
+      </fieldset>
+
+      <button type="submit" class="cta">Calcular</button>
+    </form>
+  </div>
+
+  <div class="calc-result-wrap">
+    {% if resultado %}
+      <p class="eyebrow">Resultado</p>
+
+      <div class="result-block">
+        <h2>Tempo geral</h2>
+        <div class="ledger">
+          <div class="ledger-row"><span>Tempo apurado em 2019</span><span class="mono">{{ resultado.geral.tempo_final_2019 }} dias</span></div>
+          <div class="ledger-row"><span>Faltava sem acréscimo</span><span class="mono">{{ resultado.geral.faltava_sem_acrescimo }} dias</span></div>
+          <div class="ledger-row"><span>Data sem acréscimo</span><span class="mono">{{ resultado.geral.data_sem_acrescimo.strftime('%d/%m/%Y') }}</span></div>
+          <div class="ledger-row"><span>Acréscimo (17%)</span><span class="mono">{{ resultado.geral.acrescimo_17 }} dias</span></div>
+          <div class="ledger-row total"><span>Data final</span><span class="mono">{{ resultado.geral.data_final.strftime('%d/%m/%Y') }}</span></div>
+        </div>
+      </div>
+
+      <div class="result-block">
+        <h2>Tempo militar</h2>
+        <div class="ledger">
+          <div class="ledger-row"><span>Tempo apurado em 2019</span><span class="mono">{{ resultado.militar.tempo_final_2019 }} dias</span></div>
+          <div class="ledger-row"><span>Tempo em 31/12/2021</span><span class="mono">{{ resultado.militar.tempo_2021 }} dias</span></div>
+          <div class="ledger-row"><span>Falta de tempo</span><span class="mono">{{ resultado.militar.falta_tempo }} dias</span></div>
+          <div class="ledger-row"><span>Acréscimo aplicado</span><span class="mono">{{ resultado.militar.acrescimo_aplicado }} dias</span></div>
+          <div class="ledger-row total"><span>Data final</span><span class="mono">{{ resultado.militar.data_final.strftime('%d/%m/%Y') }}</span></div>
+        </div>
+      </div>
+
+      <div class="stamp">CONFERE</div>
+    {% else %}
+      <div class="placeholder">
+        <p class="eyebrow">Resultado</p>
+        <p>Preencha a ficha ao lado para ver a data estimada de inatividade.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
