@@ -137,6 +137,13 @@
 
         <div class="stamp">CONFERE</div>
       </div>
+
+      <form method="post" action="{{ url_for('calculadora_pdf') }}" class="pdf-form">
+        {% for chave, valor in dados_form.items() %}
+          <input type="hidden" name="{{ chave }}" value="{{ valor }}">
+        {% endfor %}
+        <button type="submit" class="cta pdf-btn">Exportar PDF ⭳</button>
+      </form>
     {% else %}
       <div class="placeholder">
         <p class="eyebrow">Resultado</p>
