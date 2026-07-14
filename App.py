@@ -6,9 +6,20 @@ from Calculo import calcular
 app = Flask(__name__)
 
 
+@app.template_filter("numero_br")
+def numero_br(valor):
+    """Formata um inteiro com separador de milhar no padrão brasileiro.
+    Ex.: 8760 -> '8.760'. Números negativos mantêm o sinal: -366 -> '-366'.
+    """
+    try:
+        return f"{int(valor):,}".replace(",", ".")
+    except (TypeError, ValueError):
+        return valor
+
+
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("Index.html")
 
 
 @app.route("/Calculadora", methods=["GET", "POST"])

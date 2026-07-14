@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Calculadora de Inatividade{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='Style.css') }}">
 </head>
 <body>
   <header class="topbar">
-    <a href="{{ url_for('Index') }}" class="brand">
+    <a href="{{ url_for('index') }}" class="brand">
       <span class="brand-mark">TI</span>
       <span class="brand-name">Tempo de Inatividade</span>
     </a>
     <nav>
-      <a href="{{ url_for('Index') }}">Início</a>
+      <a href="{{ url_for('index') }}">Início</a>
       <a href="{{ url_for('Calculadora') }}">Calculadora</a>
     </nav>
   </header>

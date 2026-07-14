@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "Base.html" %}
 {% block title %}Calculadora de Inatividade{% endblock %}
 {% block content %}
 
@@ -74,29 +74,69 @@
     {% if resultado %}
       <p class="eyebrow">Resultado</p>
 
-      <div class="result-block">
-        <h2>Tempo geral</h2>
-        <div class="ledger">
-          <div class="ledger-row"><span>Tempo apurado em 2019</span><span class="mono">{{ resultado.geral.tempo_final_2019 }} dias</span></div>
-          <div class="ledger-row"><span>Faltava sem acréscimo</span><span class="mono">{{ resultado.geral.faltava_sem_acrescimo }} dias</span></div>
-          <div class="ledger-row"><span>Data sem acréscimo</span><span class="mono">{{ resultado.geral.data_sem_acrescimo.strftime('%d/%m/%Y') }}</span></div>
-          <div class="ledger-row"><span>Acréscimo (17%)</span><span class="mono">{{ resultado.geral.acrescimo_17 }} dias</span></div>
-          <div class="ledger-row total"><span>Data final</span><span class="mono">{{ resultado.geral.data_final.strftime('%d/%m/%Y') }}</span></div>
+      <div class="calc-results">
+        <div class="result-block">
+          <h2>Tempo geral</h2>
+          <div class="ledger">
+            <div class="ledger-row">
+              <span>Tempo apurado em 2019</span>
+              <span class="mono">{{ resultado.geral.tempo_final_2019 | numero_br }} dias</span>
+            </div>
+            <div class="ledger-row">
+              <span>Faltava sem acréscimo</span>
+              {% if resultado.geral.faltava_sem_acrescimo > 0 %}
+                <span class="mono">{{ resultado.geral.faltava_sem_acrescimo | numero_br }} dias</span>
+              {% else %}
+                <span class="mono tag-ok">Tempo já cumprido</span>
+              {% endif %}
+            </div>
+            <div class="ledger-row">
+              <span>Data sem acréscimo</span>
+              <span class="mono">{{ resultado.geral.data_sem_acrescimo.strftime('%d/%m/%Y') }}</span>
+            </div>
+            <div class="ledger-row">
+              <span>Acréscimo (17%)</span>
+              <span class="mono">{{ resultado.geral.acrescimo_17 | numero_br }} dias</span>
+            </div>
+            <div class="ledger-row total">
+              <span>Data final</span>
+              <span class="mono">{{ resultado.geral.data_final.strftime('%d/%m/%Y') }}</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="result-block">
-        <h2>Tempo militar</h2>
-        <div class="ledger">
-          <div class="ledger-row"><span>Tempo apurado em 2019</span><span class="mono">{{ resultado.militar.tempo_final_2019 }} dias</span></div>
-          <div class="ledger-row"><span>Tempo em 31/12/2021</span><span class="mono">{{ resultado.militar.tempo_2021 }} dias</span></div>
-          <div class="ledger-row"><span>Falta de tempo</span><span class="mono">{{ resultado.militar.falta_tempo }} dias</span></div>
-          <div class="ledger-row"><span>Acréscimo aplicado</span><span class="mono">{{ resultado.militar.acrescimo_aplicado }} dias</span></div>
-          <div class="ledger-row total"><span>Data final</span><span class="mono">{{ resultado.militar.data_final.strftime('%d/%m/%Y') }}</span></div>
+        <div class="result-block">
+          <h2>Tempo militar</h2>
+          <div class="ledger">
+            <div class="ledger-row">
+              <span>Tempo apurado em 2019</span>
+              <span class="mono">{{ resultado.militar.tempo_final_2019 | numero_br }} dias</span>
+            </div>
+            <div class="ledger-row">
+              <span>Tempo em 31/12/2021</span>
+              <span class="mono">{{ resultado.militar.tempo_2021 | numero_br }} dias</span>
+            </div>
+            <div class="ledger-row">
+              <span>Falta de tempo</span>
+              {% if resultado.militar.falta_tempo > 0 %}
+                <span class="mono">{{ resultado.militar.falta_tempo | numero_br }} dias</span>
+              {% else %}
+                <span class="mono tag-ok">Tempo já cumprido</span>
+              {% endif %}
+            </div>
+            <div class="ledger-row">
+              <span>Acréscimo aplicado</span>
+              <span class="mono">{{ resultado.militar.acrescimo_aplicado | numero_br }} dias</span>
+            </div>
+            <div class="ledger-row total">
+              <span>Data final</span>
+              <span class="mono">{{ resultado.militar.data_final.strftime('%d/%m/%Y') }}</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="stamp">CONFERE</div>
+        <div class="stamp">CONFERE</div>
+      </div>
     {% else %}
       <div class="placeholder">
         <p class="eyebrow">Resultado</p>

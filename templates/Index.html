@@ -1,16 +1,15 @@
-{% extends "base.html" %}
+{% extends "Base.html" %}
 {% block title %}Calculadora de Inatividade — Início{% endblock %}
 {% block content %}
 
 <section class="hero">
   <div class="hero-text">
     <p class="eyebrow">Regra de transição · EC 103/2019</p>
-    <h1>Quando você completa o tempo de inatividade?</h1>
+    <h1>Cálculo de tempo para Inatividade</h1>
     <p class="lede">
-      Informe seus dados de tempo de serviço geral e militar e veja, lado a lado,
-      a data estimada pela regra sem pedágio e pela regra com o acréscimo de 17%.
+      Informe os dados de acordo com o resumo funcional de 2019 emitido no RHE.
     </p>
-    <a class="cta" href="{{ url_for('calculadora') }}">Calcular meu tempo →</a>
+    <a class="cta" href="{{ url_for('Calculadora') }}">Calcular tempo →</a>
   </div>
 
   <div class="hero-card" aria-hidden="true">
@@ -25,7 +24,6 @@
         <span>Data final estimada</span><span class="mono">29/01/2028</span>
       </div>
     </div>
-    <div class="stamp">CONFERE</div>
   </div>
 </section>
 
@@ -33,16 +31,8 @@
   <p class="eyebrow">Como funciona</p>
   <div class="steps">
     <div class="step">
-      <span class="step-num">Sexo e tempo bruto</span>
-      <p>Informe o sexo e o tempo de serviço geral e militar apurado em 31/12/2019.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">Descontos e averbações</span>
-      <p>Entre com licenças especiais convertidas e tempos privados ou militares averbados após 2019.</p>
-    </div>
-    <div class="step">
-      <span class="step-num">Duas datas, lado a lado</span>
-      <p>A ferramenta calcula o tempo geral e o tempo militar, aplicando o pedágio quando necessário.</p>
+      <span class="step-num">Passo a passo</span>
+      <p>Siga o passo a passo, conforme os dados solicitados.</p>
     </div>
   </div>
 </section>
